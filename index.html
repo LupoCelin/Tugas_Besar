@@ -15,34 +15,20 @@
         }
 
         body {
-            background-color: #3b602c; /* Latar belakang hijau tua luar frame sesuai image_b51905.png */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px 0;
-        }
-
-        /* --- MOBILE CONTAINER (FRAME HP) --- */
-        .phone-container {
-            background-color: #f4f6f9;
-            width: 100%;
-            max-width: 390px;
-            border: 4px solid #1e3d6b;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            background-color: #f4f6f9; /* Mengubah background utama menjadi abu-abu terang */
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* --- HEADER UTAMA (TOP BRANDING) --- */
+        /* --- HEADER UTAMA (FULL WIDTH) --- */
         .main-header {
             background-color: #1e3d6b;
             color: #ffffff;
             text-align: center;
             padding: 20px 15px;
             border-bottom: 2px solid #38679a;
+            width: 100%;
         }
 
         .logo-container {
@@ -53,7 +39,7 @@
         }
 
         .logo-img {
-            height: 55px; /* Ukuran tinggi logo di header */
+            height: 55px;
             width: auto;
             object-fit: contain;
         }
@@ -66,7 +52,7 @@
             font-weight: 600;
         }
 
-        /* --- NAVIGATION & SEARCH BAR --- */
+        /* --- NAVIGATION & SEARCH BAR (FULL WIDTH) --- */
         .nav-search-bar {
             background-color: #38679a;
             display: flex;
@@ -74,6 +60,7 @@
             align-items: center;
             padding: 10px 15px;
             color: #ffffff;
+            width: 100%;
         }
 
         .menu-toggle {
@@ -104,13 +91,16 @@
             font-style: italic;
         }
 
-        /* --- CONTENT AREA --- */
+        /* --- CONTENT AREA (RESPONSIF PENUH) --- */
         .content {
-            padding: 25px 20px;
+            padding: 20px 15px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             gap: 15px;
+            width: 100%;
+            max-width: 600px; /* Membatasi lebar maksimal di desktop agar tetap rapi */
+            margin: 0 auto;  /* Membuat konten tetap di tengah jika dibuka di laptop */
         }
 
         /* Kotak Event */
@@ -149,7 +139,7 @@
             height: 100%;
         }
 
-        /* --- ACCORDION / DROPDOWN MENU AREA --- */
+        /* --- ACCORDION / DROPDOWN MENU --- */
         .menu-list-group {
             display: flex;
             flex-direction: column;
@@ -159,7 +149,6 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
-        /* Tombol Utama Menu Dropdown */
         .dropdown-btn {
             background-color: #ffffff;
             width: 100%;
@@ -188,13 +177,11 @@
             text-align: center;
         }
 
-        /* Panah Indikator */
         .arrow-icon {
             font-size: 12px;
             transition: transform 0.3s ease;
         }
 
-        /* Wadah Elemen Sub-Menu */
         .dropdown-container {
             max-height: 0;
             overflow: hidden;
@@ -235,13 +222,15 @@
             border-bottom: none;
         }
 
-        /* --- FOOTER UTAMA --- */
+        /* --- FOOTER UTAMA (FULL WIDTH) --- */
         .main-footer {
             background-color: #1e3d6b;
             color: #ffffff;
             text-align: center;
-            padding: 15px;
+            padding: 20px 15px;
             border-top: 2px solid #38679a;
+            width: 100%;
+            margin-top: auto; /* Memastikan footer selalu berada di paling bawah layar */
         }
 
         .footer-logo-container {
@@ -252,7 +241,7 @@
         }
 
         .footer-logo-img {
-            height: 35px; /* Ukuran tinggi logo di footer */
+            height: 35px;
             width: auto;
             object-fit: contain;
         }
@@ -266,101 +255,97 @@
 </head>
 <body>
 
-    <div class="phone-container">
-        
-        <header class="main-header">
-            <div class="logo-container">
-                <img src="logo-polinema.png" alt="Logo Polinema" class="logo-img">
-            </div>
-            <h1>Jurusan Teknologi Informasi<br>Politeknik Negeri Malang</h1>
-        </header>
+    <header class="main-header">
+        <div class="logo-container">
+            <img src="logo-polinema.png" alt="Logo Polinema" class="logo-img">
+        </div>
+        <h1>Jurusan Teknologi Informasi<br>Politeknik Negeri Malang</h1>
+    </header>
 
-        <div class="nav-search-bar">
-            <div class="menu-toggle">
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <span>Menu</span>
+    <div class="nav-search-bar">
+        <div class="menu-toggle">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <div class="search-box">.....Search</div>
+            <span>Menu</span>
+        </div>
+        <div class="search-box">.....Search</div>
+    </div>
+
+    <main class="content">
+        <a href="#" class="box-event">Event</a>
+
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/3zPFX4DuYt4" 
+                    title="Video Profil Jurusan Teknologi Informasi" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+            </iframe>
         </div>
 
-        <main class="content">
-            <a href="#" class="box-event">Event</a>
-
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/3zPFX4DuYt4" 
-                        title="Video Profil Jurusan Teknologi Informasi" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                </iframe>
+        <div class="menu-list-group">
+            
+            <button class="dropdown-btn" onclick="toggleDropdown(this, 'prodiDropdown')">
+                <span class="dropdown-title">
+                    <i class="fa-solid fa-graduation-cap"></i> Program Studi
+                </span>
+                <span class="arrow-icon">▼</span>
+            </button>
+            <div class="dropdown-container" id="prodiDropdown">
+                <a href="#" class="sub-menu-item">Teknik Informatika</a>
+                <a href="#" class="sub-menu-item">Sistem Informasi Bisnis</a>
+                <a href="#" class="sub-menu-item">Manajemen Informatika</a>
+                <a href="#" class="sub-menu-item">Pengembangan Perangkat Lunak</a>
             </div>
 
-            <div class="menu-list-group">
-                
-                <button class="dropdown-btn" onclick="toggleDropdown(this, 'prodiDropdown')">
-                    <span class="dropdown-title">
-                        <i class="fa-solid fa-graduation-cap"></i> Program Studi
-                    </span>
-                    <span class="arrow-icon">▼</span>
-                </button>
-                <div class="dropdown-container" id="prodiDropdown">
-                    <a href="#" class="sub-menu-item">Teknik Informatika</a>
-                    <a href="#" class="sub-menu-item">Sistem Informasi Bisnis</a>
-                    <a href="#" class="sub-menu-item">Manajemen Informatika</a>
-                    <a href="#" class="sub-menu-item">Pengembangan Perangkat Lunak</a>
-                </div>
-
-                <button class="dropdown-btn" onclick="toggleDropdown(this, 'mahasiswaDropdown')">
-                    <span class="dropdown-title">
-                        <i class="fa-solid fa-users"></i> Mahasiswa Aktif
-                    </span>
-                    <span class="arrow-icon">▼</span>
-                </button>
-                <div class="dropdown-container" id="mahasiswaDropdown">
-                    <a href="#" class="sub-menu-item">Jumlah Mahasiswa Aktif</a>
-                    <a href="#" class="sub-menu-item">Prestasi Mahasiswa Aktif</a>
-                    <a href="#" class="sub-menu-item">Biodata Mahasiswa Aktif</a>
-                </div>
-
-                <button class="dropdown-btn" onclick="toggleDropdown(this, 'alumniDropdown')">
-                    <span class="dropdown-title">
-                        <i class="fa-solid fa-user-graduate"></i> Alumni
-                    </span>
-                    <span class="arrow-icon">▼</span>
-                </button>
-                <div class="dropdown-container" id="alumniDropdown">
-                    <a href="#" class="sub-menu-item">Prestasi Alumni</a>
-                    <a href="#" class="sub-menu-item">Total Alumni</a>
-                    <a href="#" class="sub-menu-item">Biodata Alumni</a>
-                </div>
-
-                <button class="dropdown-btn" onclick="toggleDropdown(this, 'labDropdown')">
-                    <span class="dropdown-title">
-                        <i class="fa-solid fa-flask-vial"></i> Laboratorium Riset
-                    </span>
-                    <span class="arrow-icon">▼</span>
-                </button>
-                <div class="dropdown-container" id="labDropdown">
-                    <a href="#" class="sub-menu-item">Jenis-jenis Laboratorium</a>
-                    <a href="#" class="sub-menu-item">Total Laboratorium</a>
-                    <a href="#" class="sub-menu-item">Detail Laboratorium</a>
-                </div>
-
+            <button class="dropdown-btn" onclick="toggleDropdown(this, 'mahasiswaDropdown')">
+                <span class="dropdown-title">
+                    <i class="fa-solid fa-users"></i> Mahasiswa Aktif
+                </span>
+                <span class="arrow-icon">▼</span>
+            </button>
+            <div class="dropdown-container" id="mahasiswaDropdown">
+                <a href="#" class="sub-menu-item">Jumlah Mahasiswa Aktif</a>
+                <a href="#" class="sub-menu-item">Prestasi Mahasiswa Aktif</a>
+                <a href="#" class="sub-menu-item">Biodata Mahasiswa Aktif</a>
             </div>
-        </main>
 
-        <footer class="main-footer">
-            <div class="footer-logo-container">
-                <img src="logo-polinema.png" alt="Logo Polinema Footer" class="footer-logo-img">
+            <button class="dropdown-btn" onclick="toggleDropdown(this, 'alumniDropdown')">
+                <span class="dropdown-title">
+                    <i class="fa-solid fa-user-graduate"></i> Alumni
+                </span>
+                <span class="arrow-icon">▼</span>
+            </button>
+            <div class="dropdown-container" id="alumniDropdown">
+                <a href="#" class="sub-menu-item">Prestasi Alumni</a>
+                <a href="#" class="sub-menu-item">Total Alumni</a>
+                <a href="#" class="sub-menu-item">Biodata Alumni</a>
             </div>
-            <p>Jl. Soekarno Hatta No.9, Jatimulyo,<br>Kec. Lowokwaru, Kota Malang, Jawa Timur 65141</p>
-        </footer>
 
-    </div>
+            <button class="dropdown-btn" onclick="toggleDropdown(this, 'labDropdown')">
+                <span class="dropdown-title">
+                    <i class="fa-solid fa-flask-vial"></i> Laboratorium Riset
+                </span>
+                <span class="arrow-icon">▼</span>
+            </button>
+            <div class="dropdown-container" id="labDropdown">
+                <a href="#" class="sub-menu-item">Jenis-jenis Laboratorium</a>
+                <a href="#" class="sub-menu-item">Total Laboratorium</a>
+                <a href="#" class="sub-menu-item">Detail Laboratorium</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-logo-container">
+            <img src="logo-polinema.png" alt="Logo Polinema Footer" class="footer-logo-img">
+        </div>
+        <p>Jl. Soekarno Hatta No.9, Jatimulyo,<br>Kec. Lowokwaru, Kota Malang, Jawa Timur 65141</p>
+    </footer>
 
     <script>
         function toggleDropdown(buttonElement, dropdownId) {

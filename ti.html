@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JTI Politeknik Negeri Malang</title>
+    <title>D-IV Teknik Informatika - JTI Polinema</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- RESET UTAMA --- */
@@ -15,7 +15,7 @@
         }
 
         body {
-            background-color: #ffffff; /* Latar belakang dasar putih bersih */
+            background-color: #ffffff;
             color: #333333;
             display: flex;
             flex-direction: column;
@@ -90,7 +90,7 @@
             cursor: pointer;
         }
 
-        /* --- DROPDOWN HAMBURGER MENU (RESPONSIF HP) --- */
+        /* --- DROPDOWN HAMBURGER MENU --- */
         .dropdown-menu-box {
             background-color: #ffffff;
             width: 100%;
@@ -157,86 +157,115 @@
             border-bottom: 1px solid #edf2f7;
         }
 
-        .child-menu-link:hover {
-            background-color: #edf2f7;
-            color: #1a3a60;
-        }
-
-        /* --- KONTEN TENGAH / MAIN CONTAINER --- */
-        .main-container {
+        /* --- KONTEN HALAMAN PROGRAM STUDI --- */
+        .prodi-container {
             flex: 1;
             width: 100%;
             padding: 20px 15px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 18px;
         }
 
-        /* Card Event */
-        .event-card {
-            border: 2px solid #1a3a60;
-            border-radius: 8px;
-            padding: 25px 15px;
-            text-align: center;
+        /* Tombol Kembali ke Index */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             color: #1a3a60;
-            font-size: 18px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Judul Besar */
+        .prodi-title {
+            color: #1a3a60;
+            font-size: 22px;
             font-weight: 700;
-            background-color: #ffffff;
+            border-bottom: 2px solid #244b7a;
+            padding-bottom: 8px;
+            margin-top: 5px;
         }
 
-        /* Pemutar Video Sederhana / Placeholder */
-        .video-box {
+        /* Teks Paragraf Deskripsi Profil */
+        .prodi-description {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444444;
+            text-align: justify;
+        }
+
+        /* Tabel Spesifikasi/Detail Akreditasi */
+        .info-table {
             width: 100%;
-            background-color: #222222;
-            border-radius: 8px;
+            border-collapse: collapse;
+            margin-top: 5px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
             overflow: hidden;
-            position: relative;
-            aspect-ratio: 16 / 9;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
 
-        .video-box iframe {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border: none;
+        .info-table tr {
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        /* --- LIST SELEKSI ACCORDION --- */
+        .info-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .info-table td {
+            padding: 12px;
+            font-size: 14px;
+            vertical-align: top;
+        }
+
+        .info-table td.label-cell {
+            font-weight: 600;
+            color: #1a3a60;
+            width: 35%;
+            background-color: #f8fafc;
+        }
+
+        .info-table td.value-cell {
+            color: #333333;
+        }
+
+        /* Akordeon Visi, Misi, Tujuan */
         .accordion-wrapper {
             display: flex;
             flex-direction: column;
-            border: 2px solid #1a3a60;
-            border-radius: 8px;
-            overflow: hidden;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .acc-trigger {
             background-color: #ffffff;
             width: 100%;
-            border: none;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 15px 20px;
+            border: 1px solid #1a3a60;
+            border-radius: 6px;
+            padding: 14px 15px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 12px;
             cursor: pointer;
             text-align: left;
             color: #1a3a60;
             font-size: 15px;
             font-weight: 600;
-        }
-
-        .acc-trigger i:first-child {
-            font-size: 16px;
-            width: 20px;
-            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .acc-trigger .arrow-icon {
-            margin-left: auto;
             font-size: 11px;
             transition: transform 0.2s;
+        }
+
+        .acc-trigger.active {
+            background-color: #1a3a60;
+            color: #ffffff;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
         }
 
         .acc-trigger.active .arrow-icon {
@@ -247,25 +276,34 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
-            background-color: #fdfdfd;
+            background-color: #f8fafc;
+            border: 1px solid #1a3a60;
+            border-top: none;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            margin-top: -10px;
+            margin-bottom: 5px;
         }
 
-        .acc-item-link {
-            display: block;
-            padding: 12px 20px 12px 50px;
-            text-decoration: none;
-            color: #444444;
+        .acc-content {
+            padding: 15px;
             font-size: 14px;
-            border-bottom: 1px solid #f1f5f9;
+            line-height: 1.6;
+            color: #444444;
+            text-align: justify;
         }
 
-        .acc-item-link:last-child {
-            border-bottom: none;
+        .acc-content ul, .acc-content ol {
+            padding-left: 20px;
+            margin-top: 5px;
         }
 
-        .acc-item-link:hover {
-            background-color: #f1f5f9;
-            color: #1a3a60;
+        .acc-content li {
+            margin-bottom: 8px;
+        }
+
+        .acc-content li:last-child {
+            margin-bottom: 0;
         }
 
         /* --- FOOTER (FULL WIDTH) --- */
@@ -311,7 +349,6 @@
     </div>
 
     <div class="dropdown-menu-box" id="mainDropdownMenu">
-        
         <button class="nested-row-btn" onclick="toggleNestedLevel(this, 'child-tentang')">
             Tentang Kami <span>▼</span>
         </button>
@@ -319,100 +356,85 @@
             <a href="#" class="child-menu-link">Sejarah</a>
             <a href="#" class="child-menu-link">Visi, Misi dan Tujuan</a>
             <a href="#" class="child-menu-link">Struktur Organisasi</a>
-            <a href="#" class="child-menu-link">Tenaga Pengajar</a>
-            <a href="#" class="child-menu-link">Tenaga Kependidikan</a>
-            <a href="#" class="child-menu-link">Sarana dan Prasarana</a>
-            <a href="#" class="child-menu-link">Kerjasama</a>
         </div>
-
         <button class="nested-row-btn" onclick="toggleNestedLevel(this, 'child-akademik')">
             Akademik <span>▼</span>
         </button>
         <div class="nested-child-container" id="child-akademik">
-            <a href="#" class="child-menu-link">D-II Pengembangan Perangkat Lunak</a>
+            <a href="ti.html" class="child-menu-link">D-IV Teknik Informatika</a>
             <a href="#" class="child-menu-link">Program Diploma III</a>
             <a href="#" class="child-menu-link">Program Diploma IV</a>
-            <a href="#" class="child-menu-link">Magister Terapan</a>
-            <a href="#" class="child-menu-link">Kalender Academic</a>
         </div>
-
-        <button class="nested-row-btn" onclick="toggleNestedLevel(this, 'child-mhs')">
-            Kemahasiswaan <span>▼</span>
-        </button>
-        <div class="nested-child-container" id="child-mhs">
-            <a href="#" class="child-menu-link">Tata Tertib</a>
-            <a href="#" class="child-menu-link">Organisasi Mahasiswa</a>
-            <a href="#" class="child-menu-link">Beasiswa</a>
-        </div>
-
-        <button class="nested-row-btn" onclick="toggleNestedLevel(this, 'child-penelitian')">
-            Penelitian-Pengabdian <span>▼</span>
-        </button>
-        <div class="nested-child-container" id="child-penelitian">
-            <a href="#" class="child-menu-link">Penelitian</a>
-            <a href="#" class="child-menu-link">Pengabdian</a>
-            <a href="#" class="child-menu-link">Laboratorium Riset</a>
-            <a href="#" class="child-menu-link">Jurnal</a>
-        </div>
-
-        <a href="#" class="nested-row-link">Berita & Pengumuman</a>
+        <a href="index.html" class="nested-row-link">Beranda Utama</a>
     </div>
 
-    <main class="main-container">
+    <main class="prodi-container">
         
-        <div class="event-card">
-            Event
-        </div>
+        <a href="index.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
+        </a>
 
-        <div class="video-box">
-            <iframe src="https://www.youtube.com/embed/3zPFX4DuYt4" allowfullscreen></iframe>
-        </div>
+        <h2 class="prodi-title">D-IV Teknik Informatika</h2>
+
+        <p class="prodi-description">
+            Program Studi Diploma IV (D-IV) Teknik Informatika resmi berdiri pada tahun 2010 berdasarkan SK Mendiknas No. 50/D/O/2010. Sebagai bagian dari Jurusan Teknologi Informasi, program studi ini dirancang secara khusus untuk menghasilkan lulusan Sarjana Terapan yang kompeten di bidang Sistem Informasi.
+        </p>
+
+        <table class="info-table">
+            <tr>
+                <td class="label-cell">Akreditasi LAM INFOKOM</td>
+                <td class="value-cell"><strong>Unggul</strong> (Agustus 2023, SK No. 127/SK/LAM-INFOKOM/Ak/STr/VIII/2023)</td>
+            </tr>
+            <tr>
+                <td class="label-cell">Akreditasi Internasional</td>
+                <td class="value-cell"><strong>Accredited</strong> oleh IABEE (Maret 2025)</td>
+            </tr>
+            <tr>
+                <td class="label-cell">Akreditasi BAN-PT Awalan</td>
+                <td class="value-cell">Peringkat B (SK No. 1810/SK/BAN-PT/Akred/Dipl-IV/VII/2018)</td>
+            </tr>
+        </table>
 
         <div class="accordion-wrapper">
             
-            <button class="acc-trigger" onclick="toggleAccordionItem(this, 'panelProdi')">
-                <i class="fa-solid fa-graduation-cap"></i>
-                <span>Program Studi</span>
+            <button class="acc-trigger" onclick="toggleAccordionItem(this, 'panelVisi')">
+                <span>Visi</span>
                 <span class="arrow-icon">▼</span>
             </button>
-            <div class="acc-panel" id="panelProdi">
-                <a href="ti.html" class="acc-item-link">Teknik Informatika</a>
-                <a href="sib.html" class="acc-item-link">Sistem Informasi Bisnis</a>
-                <a href="mi.html" class="acc-item-link">Manajemen Informatika</a>
-                <a href="ppl.html" class="acc-item-link">Pengembangan Perangkat Lunak</a>
+            <div class="acc-panel" id="panelVisi">
+                <div class="acc-content">
+                    Menjadi program studi unggul yang berdaya saing global dalam pengembangan teknologi perangkat lunak dan sistem cerdas terapan.
+                </div>
             </div>
 
-            <button class="acc-trigger" onclick="toggleAccordionItem(this, 'panelMhs')">
-                <i class="fa-solid fa-users"></i>
-                <span>Mahasiswa Aktif</span>
+            <button class="acc-trigger" onclick="toggleAccordionItem(this, 'panelMisi')">
+                <span>Misi</span>
                 <span class="arrow-icon">▼</span>
             </button>
-            <div class="acc-panel" id="panelMhs">
-                <a href="#" class="acc-item-link">Jumlah Mahasiswa Aktif</a>
-                <a href="#" class="acc-item-link">Prestasi Mahasiswa Aktif</a>
-                <a href="#" class="acc-item-link">Biodata Mahasiswa Aktif</a>
+            <div class="acc-panel" id="panelMisi">
+                <div class="acc-content">
+                    <ul>
+                        <li>Melaksanakan pendidikan terapan yang inovatif dengan memanfaatkan kemajuan teknologi, dalam rangka membentuk lulusan yang mampu memberikan solusi transformatif untuk dunia industri dan masyarakat di bidang Teknik Informatika.</li>
+                        <li>Mengembangkan ilmu pengetahuan melalui penelitian terapan inovatif bidang Teknik Informatika.</li>
+                        <li>Mentransformasikan kemajuan teknik informatika yang dimiliki dalam melaksanakan pengabdian masyarakat.</li>
+                    </ul>
+                </div>
             </div>
 
-            <button class="acc-trigger" onclick="toggleAccordionItem(this, 'panelAlumni')">
-                <i class="fa-solid fa-user-graduate"></i>
-                <span>Alumni</span>
+            <button class="acc-trigger" onclick="toggleAccordionItem(this, 'panelTujuan')">
+                <span>Tujuan</span>
                 <span class="arrow-icon">▼</span>
             </button>
-            <div class="acc-panel" id="panelAlumni">
-                <a href="#" class="acc-item-link">Prestasi Alumni</a>
-                <a href="#" class="acc-item-link">Total Alumni</a>
-                <a href="#" class="acc-item-link">Biodata Alumni</a>
-            </div>
-
-            <button class="acc-trigger" onclick="toggleAccordionItem(this, 'panelLab')">
-                <i class="fa-solid fa-flask-vial"></i>
-                <span>Laboratorium Riset</span>
-                <span class="arrow-icon">▼</span>
-            </button>
-            <div class="acc-panel" id="panelLab">
-                <a href="#" class="acc-item-link">Jenis-jenis Laboratorium</a>
-                <a href="#" class="acc-item-link">Total Laboratorium</a>
-                <a href="#" class="acc-item-link">Detail Laboratorium</a>
+            <div class="acc-panel" id="panelTujuan">
+                <div class="acc-content">
+                    <ol>
+                        <li>Menghasilkan lulusan bidang teknik informatika yang sesuai kebutuhan, beretika dan bermoral baik, berpengetahuan dan berketerampilan tinggi, siap bekerja dan/atau berwirausaha yang mampu bersaing dalam skala nasional dan global;</li>
+                        <li>Menghasilkan penelitian terapan bidang teknik informatika yang berskala nasional dan internasional, meningkatkan efektivitas, efisiensi, dan produktivitas dalam dunia usaha dan industri, serta mengarah pada pencapaian Hak atas Kekayaan Intelektual (HaKI), perolehan paten, dan kesejahteraan masyarakat;</li>
+                        <li>Menghasilkan pengabdian kepada masyarakat yang dilaksanakan melalui penerapan dan penyebarluasan ilmu pengetahuan dan teknologi serta pemberian layanan hasil secara profesional dalam bidang teknik informatika sehingga bermanfaat secara langsung dalam meningkatkan kesejahteraan masyarakat;</li>
+                        <li>Menghasilkan sistem manajemen pendidikan bidang teknik informatika yang memenuhi prinsip-prinsip tata kelola yang baik; dan</li>
+                        <li>Terwujudnya kerja sama yang saling menguntungkan dengan berbagai pihak baik di dalam maupun di luar negeri pada bidang teknik informatika untuk meningkatkan daya saing.</li>
+                    </ol>
+                </div>
             </div>
 
         </div>
@@ -426,7 +448,7 @@
     </footer>
 
     <script>
-        // Membuka/Tutup menu dropdown hamburger utama
+        // Membuka/Tutup menu dropdown hamburger utama atas
         function toggleMainDropdown() {
             const menu = document.getElementById('mainDropdownMenu');
             menu.classList.toggle('active');
@@ -444,7 +466,7 @@
             }
         }
 
-        // Membuka/Tutup panel akordeon daftar program studi / mahasiswa di bawah halaman
+        // Membuka/Tutup Item Akordeon Visi, Misi, dan Tujuan
         function toggleAccordionItem(btnElement, panelId) {
             const panel = document.getElementById(panelId);
             btnElement.classList.toggle('active');

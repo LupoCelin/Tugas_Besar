@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D-II Pengembangan Perangkat Lunak - JTI Polinema</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background-color: #ffffff; color: #333333; display: flex; flex-direction: column; min-height: 100vh; width: 100%; overflow-x: hidden; }
+        .brand-header { background-color: #1a3a60; color: #ffffff; text-align: center; padding: 20px 15px 15px 15px; width: 100%; }
+        .brand-header .logo-img { width: 70px; height: auto; margin-bottom: 10px; }
+        .brand-header h1 { font-size: 14px; font-weight: 700; letter-spacing: 0.8px; line-height: 1.4; text-transform: uppercase; }
+        .nav-action-bar { background-color: #244b7a; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; width: 100%; border-bottom: 1px solid #2d5a91; }
+        .menu-trigger { display: flex; align-items: center; gap: 10px; color: #ffffff; font-size: 16px; font-weight: 600; cursor: pointer; user-select: none; }
+        .hamburger-icon { display: flex; flex-direction: column; gap: 4px; }
+        .hamburger-icon span { display: block; width: 20px; height: 3px; background-color: #ffffff; border-radius: 2px; }
+        .search-placeholder { color: rgba(255, 255, 255, 0.6); font-size: 14px; font-style: italic; cursor: pointer; }
+        .dropdown-menu-box { background-color: #ffffff; width: 100%; max-height: 0; overflow: hidden; transition: max-height 0.35s ease-in-out; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .dropdown-menu-box.active { max-height: 80vh; overflow-y: auto; border-bottom: 2px solid #244b7a; }
+        .nested-row-btn { width: 100%; background: none; border: none; border-bottom: 1px solid #e2e8f0; padding: 14px 20px; text-align: left; color: #1a3a60; font-size: 15px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .nested-row-link { display: block; padding: 14px 20px; color: #1a3a60; text-decoration: none; font-size: 15px; font-weight: 600; border-bottom: 1px solid #e2e8f0; }
+        .nested-row-btn span { font-size: 10px; transition: transform 0.3s; }
+        .nested-row-btn.open span { transform: rotate(180deg); }
+        .nested-child-container { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: #f8fafc; }
+        .child-menu-link { display: block; padding: 12px 20px 12px 35px; color: #4a5568; text-decoration: none; font-size: 14px; border-bottom: 1px solid #edf2f7; }
+        .prodi-container { flex: 1; width: 100%; padding: 20px 15px; display: flex; flex-direction: column; gap: 18px; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: #1a3a60; text-decoration: none; font-size: 14px; font-weight: 600; }
+        .prodi-title { color: #1a3a60; font-size: 22px; font-weight: 700; border-bottom: 2px solid #244b7a; padding-bottom: 8px; margin-top: 5px; }
+        .prodi-description { font-size: 14px; line-height: 1.6; color: #444444; text-align: justify; }
+        .info-table { width: 100%; border-collapse: collapse; margin-top: 5px; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden; }
+        .info-table tr { border-bottom: 1px solid #e2e8f0; }
+        .info-table tr:last-child { border-bottom: none; }
+        .info-table td { padding: 12px; font-size: 14px; vertical-align: top; }
+        .info-table td.label-cell { font-weight: 600; color: #1a3a60; width: 35%; background-color: #f8fafc; }
+        .info-table td.value-cell { color: #333333; }
+        .accordion-wrapper { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+        .acc-trigger { background-color: #ffffff; width: 100%; border: 1px solid #1a3a60; border-radius: 6px; padding: 14px 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left; color: #1a3a60; font-size: 15px; font-weight: 600; }
+        .acc-trigger .arrow-icon { font-size: 11px; transition: transform 0.2s; }
+        .acc-trigger.active { background-color: #1a3a60; color: #ffffff; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+        .acc-trigger.active .arrow-icon { transform: rotate(180deg); }
+        .acc-panel { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: #f8fafc; border: 1px solid #1a3a60; border-top: none; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; margin-top: -10px; margin-bottom: 5px; }
+        .acc-content { padding: 15px; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify; }
+        .acc-content ul, .acc-content ol { padding-left: 20px; margin-top: 5px; }
+        .acc-content li { margin-bottom: 8px; }
+        .footer-info { background-color: #1a3a60; color: #ffffff; text-align: center; padding: 20px 15px; font-size: 12px; line-height: 1.6; width: 100%; margin-top: auto; border-top: 3px solid #244b7a; }
+        .footer-logo { width: 45px; height: auto; margin-bottom: 8px; opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <header class="brand-header">
+        <img src="img/WhatsApp Image 2026-06-08 at 12.05.52.jpeg" alt="Logo Polinema" class="logo-img">
+        <h1>Jurusan Teknologi Informasi<br>Politeknik Negeri Malang</h1>
+    </header>
+
+    <div class="nav-action-bar">
+        <div class="menu-trigger" onclick="toggleMainDropdown()">
+            <div class="hamburger-icon"><span></span><span></span><span></span></div>
+            <div>Menu</div>
+        </div>
+        <div class="search-placeholder">.....Search <i class="fa-solid fa-magnifying-glass" style="font-size: 12px; margin-left: 3px;"></i></div>
+    </div>
+
+    <div class="dropdown-menu-box" id="mainDropdownMenu">
+        <button class="nested-row-btn" onclick="toggleNestedLevel(this, 'child-tentang')">Tentang Kami <span>▼</span></button>
+        <div class="nested-child-container" id="child-tentang">
+            <a href="#" class="child-menu-link">Sejarah</a>
+            <a href="#" class="child-menu-link">Visi, Misi dan Tujuan</a>
+        </div>
+        <button class="nested-row-btn" onclick="toggleNestedLevel(this, 'child-akademik')">Akademik <span>▼</span></button>
+        <div class="nested-child-container" id="child-akademik">
+            <a href="ti.html" class="child-menu-link">D-IV Teknik Informatika</a>
+            <a href="sib.html" class="child-menu-link">D-IV Sistem Informasi Bisnis</a>
+            <a href="mi.html" class="child-menu-link">D-III Manajemen Informatika</a>
+            <a href="ppl.html" class="child-menu-link">D-II Pengembangan Perangkat Lunak</a>
+        </div>
+        <a href="index.html" class="nested-row-link">Beranda Utama</a>
+    </div>
+
+    <main class="prodi-container">
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
+        <h2 class="prodi-title">D-II Pengembangan Perangkat Lunak</h2>
+        <p class="prodi-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Terapan industri cepat kerja jalur fast-track akademi komunitas nasional.
+        </p>
+
+        <table class="info-table">
+            <tr>
+                <td class="label-cell">Gelar Kelulusan</td>
+                <td class="value-cell">Ahli Muda (A.Ma.)</td>
+            </tr>
+            <tr>
+                <td class="label-cell">Akreditasi</td>
+                <td class="value-cell">Proses Akreditasi / Terakreditasi</td>
+            </tr>
+        </table>
+
+        <div class="accordion-wrapper">
+            <button class="acc-trigger" onclick="toggleAccordionItem(this, 'panelVisi')"><span>Visi</span><span class="arrow-icon">▼</span></button>
+            <div class="acc-panel" id="panelVisi">
+                <div class="acc-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Menjadi komunitas terapan unggulan software engineer.</div>
+            </div>
+            <button class="acc-trigger" onclick="toggleAccordionItem(this, 'panelMisi')"><span>Misi</span><span class="arrow-icon">▼</span></button>
+            <div class="acc-panel" id="panelMisi">
+                <div class="acc-content">
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                        <li>Laboris nisi ut aliquip ex ea commodo consequat.</li>
+                    </ul>
+                </div>
+            </div>
+            <button class="acc-trigger" onclick="toggleAccordionItem(this, 'panelTujuan')"><span>Tujuan</span><span class="arrow-icon">▼</span></button>
+            <div class="acc-panel" id="panelTujuan">
+                <div class="acc-content">
+                    <ol>
+                        <li>Menghasilkan lulusan Ahli Muda yang siap kerja di industri digital.</li>
+                        <li>Meningkatkan produktivitas ekosistem startup lokal.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-info">
+        <img src="img/WhatsApp Image 2026-06-08 at 12.05.52.jpeg" alt="Footer Logo" class="footer-logo"><br>
+        Jl. Soekarno Hatta No.9, Jatimulyo,<br>Kec. Lowokwaru, Kota Malang, Jawa Timur 65141
+    </footer>
+
+    <script>
+        function toggleMainDropdown() { document.getElementById('mainDropdownMenu').classList.toggle('active'); }
+        function toggleNestedLevel(btn, id) {
+            const box = document.getElementById(id); btn.classList.toggle('open');
+            if (box.style.maxHeight && box.style.maxHeight !== "0px") { box.style.maxHeight = "0px"; } 
+            else { box.style.maxHeight = box.scrollHeight + "px"; }
+        }
+        function toggleAccordionItem(btn, id) {
+            const panel = document.getElementById(id); btn.classList.toggle('active');
+            if (panel.style.maxHeight && panel.style.maxHeight !== "0px") { panel.style.maxHeight = "0px"; } 
+            else { panel.style.maxHeight = panel.scrollHeight + "px"; }
+        }
+    </script>
+</body>
+</html>

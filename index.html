@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jurusan Teknologi Informasi - Polinema</title>
+    <title>Polinema Campus - JTI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- RESET STYLE --- */
@@ -15,238 +15,279 @@
         }
 
         body {
-            background-color: #f4f6f9; /* Mengubah background utama menjadi abu-abu terang */
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* --- HEADER UTAMA (FULL WIDTH) --- */
-        .main-header {
-            background-color: #1e3d6b;
-            color: #ffffff;
-            text-align: center;
-            padding: 20px 15px;
-            border-bottom: 2px solid #38679a;
-            width: 100%;
-        }
-
-        .logo-container {
-            margin: 0 auto 10px auto;
+            background-color: #2d5a27; /* Background hijau luar sesuai mockup */
             display: flex;
             justify-content: center;
-            align-items: center;
+            min-height: 100vh;
+            padding: 20px 0;
         }
 
-        .logo-img {
-            height: 100px;
-            width: auto;
-            object-fit: contain;
+        /* --- CONTAINER FRAME HP --- */
+        .phone-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 410px; /* Standar ukuran layar mobile */
+            border: 2px solid #ffffff;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            position: relative;
+            overflow-x: hidden;
         }
 
-        .main-header h1 {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            line-height: 1.4;
-            font-weight: 600;
-        }
-
-        /* --- NAVIGATION & SEARCH BAR (FULL WIDTH) --- */
-        .nav-search-bar {
-            background-color: #38679a;
+        /* --- HEADER UTAMA (BIRU TUA) --- */
+        .main-header {
+            background-color: #1a3a60;
+            padding: 20px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 15px;
-            color: #ffffff;
-            width: 100%;
+            position: relative;
+            z-index: 20;
         }
 
+        /* Menu Toggle Garis 3 di Kiri Atas */
         .menu-toggle {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        .hamburger {
-            display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
         }
 
-        .hamburger span {
+        .menu-toggle span {
             display: block;
-            width: 22px;
+            width: 28px;
             height: 3px;
             background-color: #ffffff;
             border-radius: 2px;
+            transition: 0.3s;
         }
 
-        .search-box {
+        /* Efek animasi X saat menu dibuka */
+        .menu-toggle.open span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Kaca Pembesar / Search Icon di Kanan Atas */
+        .search-icon-btn {
+            color: #ffffff;
+            font-size: 26px;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        /* --- BAR SUB-NAVIGASI UTAMA --- */
+        .sub-nav-bar {
+            background-color: #3b6998;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 5px;
+            position: relative;
+            z-index: 15;
+        }
+
+        .sub-nav-item {
+            color: #ffffff;
+            font-size: 13px;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        /* --- HAMBURGER DROPDOWN CONTENT (TENTANG KAMI, AKADEMIK, DLL) --- */
+        .hamburger-dropdown {
+            background-color: #ffffff;
+            position: absolute;
+            top: 68px; /* Tepat di bawah main-header */
+            left: 0;
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+            z-index: 18;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .hamburger-dropdown.show {
+            max-height: 500px; /* Membatasi tinggi scrollable menu */
+            overflow-y: auto;
+            border-bottom: 3px solid #3b6998;
+        }
+
+        /* Tombol Utama Tingkat 1 di dalam Hamburger */
+        .nest-trigger-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 14px 20px;
+            text-align: left;
+            color: #1a3a60;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .nest-link-btn {
+            display: block;
+            padding: 14px 20px;
+            color: #1a3a60;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .nest-trigger-btn span {
+            font-size: 11px;
+            transition: transform 0.3s;
+        }
+
+        .nest-trigger-btn.active span {
+            transform: rotate(180deg);
+        }
+
+        /* Kontainer Isi Tingkat 2 Sub-Menu */
+        .nest-content-box {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #f8fafc;
+        }
+
+        .nest-sub-link {
+            display: block;
+            padding: 11px 20px 11px 35px;
+            color: #4a5568;
+            text-decoration: none;
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-            font-style: italic;
+            font-weight: 500;
+            border-bottom: 1px solid #edf2f7;
         }
 
-        /* --- CONTENT AREA (RESPONSIF PENUH) --- */
-        .content {
+        .nest-sub-link:hover {
+            background-color: #edf2f7;
+            color: #1a3a60;
+        }
+
+        /* --- KONTEN TENGAH / KAMPUS AREA --- */
+        .main-content {
             padding: 20px 15px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            text-align: center;
             gap: 15px;
-            width: 100%;
-            max-width: 600px; /* Membatasi lebar maksimal di desktop agar tetap rapi */
-            margin: 0 auto;  /* Membuat konten tetap di tengah jika dibuka di laptop */
         }
 
-        /* Kotak Event */
-        .box-event {
-            background-color: #ffffff;
-            border: 2px solid #1e3d6b;
-            border-radius: 6px;
-            height: 70px;
+        .main-content h2 {
+            color: #000000;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .main-content p {
+            color: #333333;
+            font-size: 16px;
+            line-height: 1.4;
+            margin-top: -5px;
+        }
+
+        .campus-img-box {
+            width: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .campus-img-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- ACCORDION UTAMA DI BAWAH (PRODI, MHS, ALUMNI) --- */
+        .accordion-group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .acc-btn {
+            background-color: #112d4e;
+            color: #ffffff;
+            width: 100%;
+            border: none;
+            border-radius: 25px; /* Membuat bentuk kapsul bulat lonjong */
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 18px;
-            font-weight: 600;
-            color: #1e3d6b;
-            text-decoration: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        /* Kotak Video Jurusan */
-        .video-container {
-            border: 2px solid #1e3d6b;
-            border-radius: 6px;
-            overflow: hidden;
-            background-color: #000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
-        .video-container iframe {
+        .acc-btn .acc-arrow {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* --- ACCORDION / DROPDOWN MENU --- */
-        .menu-list-group {
-            display: flex;
-            flex-direction: column;
-            border: 2px solid #1e3d6b;
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .dropdown-btn {
-            background-color: #ffffff;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 20px;
-            border: none;
-            color: #1e3d6b;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            border-bottom: 2px solid #1e3d6b;
-            text-align: left;
-        }
-
-        .dropdown-title {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .dropdown-title i {
-            font-size: 20px;
-            width: 25px;
-            text-align: center;
-        }
-
-        .arrow-icon {
+            right: 25px;
             font-size: 12px;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s;
         }
 
-        .dropdown-container {
+        .acc-btn.active .acc-arrow {
+            transform: rotate(180deg);
+        }
+
+        .acc-container {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
             background-color: #ffffff;
+            border-radius: 0 0 12px 12px;
+            width: 90%;
+            margin: -5px auto 5px auto;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        .dropdown-container.open-border {
-            border-bottom: 2px solid #1e3d6b;
-        }
-
-        .sub-menu-item {
+        .acc-sub-item {
             display: block;
-            padding: 12px 20px;
-            padding-left: 60px;
+            padding: 11px 15px;
             text-decoration: none;
             color: #333333;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
-            border-bottom: 1px solid #e2e8f0;
-            transition: background 0.2s;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: left;
         }
 
-        .sub-menu-item:last-child {
+        .acc-sub-item:last-child {
             border-bottom: none;
         }
 
-        .sub-menu-item:hover {
-            background-color: #f0f4f8;
-            color: #1e3d6b;
-        }
-
-        .dropdown-btn.active .arrow-icon {
-            transform: rotate(180deg);
-        }
-
-        .menu-list-group .dropdown-btn:last-of-type {
-            border-bottom: none;
-        }
-
-        /* --- FOOTER UTAMA (FULL WIDTH) --- */
-        .main-footer {
-            background-color: #1e3d6b;
+        /* --- FOOTER ALAMAT --- */
+        .site-footer {
+            background-color: #1a3a60;
             color: #ffffff;
             text-align: center;
-            padding: 20px 15px;
-            border-top: 2px solid #38679a;
-            width: 100%;
-            margin-top: auto; /* Memastikan footer selalu berada di paling bawah layar */
-        }
-
-        .footer-logo-container {
-            margin: 0 auto 10px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .footer-logo-img {
-            height: 35px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .main-footer p {
+            padding: 15px 10px;
             font-size: 11px;
             line-height: 1.5;
             font-weight: 500;
@@ -255,109 +296,188 @@
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="logo-container">
-            <img src="Logo-polinema.PNG" alt="Logo Polinema" class="logo-img">
-        </div>
-        <h1>Jurusan Teknologi Informasi<br>Politeknik Negeri Malang</h1>
-    </header>
+    <div class="phone-container">
 
-    <div class="nav-search-bar">
-        <div class="menu-toggle">
-            <div class="hamburger">
+        <header class="main-header">
+            <div class="menu-toggle" id="menuToggleBtn" onclick="toggleHamburger()">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <span>Menu</span>
+            <div class="search-icon-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        </header>
+
+        <nav class="sub-nav-bar">
+            <a class="sub-nav-item" onclick="openHamburgerToSection('subTentang')">Tentang Kami ▼</a>
+            <a class="sub-nav-item" onclick="openHamburgerToSection('subPenelitian')">Penelitian ▼</a>
+            <a class="sub-nav-item" onclick="openHamburgerToSection('subBerita')">Berita ▼</a>
+        </nav>
+
+        <div class="hamburger-dropdown" id="hamburgerMenuBox">
+            
+            <button class="nest-trigger-btn" id="btn-subTentang" onclick="toggleNestedMenu(this, 'subTentang')">
+                Tentang Kami <span>▼</span>
+            </button>
+            <div class="nest-content-box" id="subTentang">
+                <a href="#" class="nest-sub-link">Sejarah</a>
+                <a href="#" class="nest-sub-link">Visi, Misi dan Tujuan</a>
+                <a href="#" class="nest-sub-link">Struktur Organisasi</a>
+                <a href="#" class="nest-sub-link">Tenaga Pengajar</a>
+                <a href="#" class="nest-sub-link">Tenaga Kependidikan</a>
+                <a href="#" class="nest-sub-link">Sarana dan Prasarana</a>
+                <a href="#" class="nest-sub-link">Kerjasama</a>
+            </div>
+
+            <button class="nest-trigger-btn" id="btn-subAkademik" onclick="toggleNestedMenu(this, 'subAkademik')">
+                Akademik <span>▼</span>
+            </button>
+            <div class="nest-content-box" id="subAkademik">
+                <a href="#" class="nest-sub-link">D-II Pengembangan Perangkat Lunak</a>
+                <a href="#" class="nest-sub-link">Program Diploma III ▼</a>
+                <a href="#" class="nest-sub-link">Program Diploma IV ▼</a>
+                <a href="#" class="nest-sub-link">Magister Terapan Rekayasa Teknologi Informasi</a>
+                <a href="#" class="nest-sub-link">Program Kelas Internasional</a>
+                <a href="#" class="nest-sub-link">Program Double Degree</a>
+                <a href="#" class="nest-sub-link">Program Alih Jenjang</a>
+                <a href="#" class="nest-sub-link">Program Rekognisi Pembelajaran Lampau</a>
+                <a href="#" class="nest-sub-link">Aturan Akademik</a>
+                <a href="#" class="nest-sub-link">Kalender Akademik</a>
+            </div>
+
+            <button class="nest-trigger-btn" id="btn-subKemahasiswaan" onclick="toggleNestedMenu(this, 'subKemahasiswaan')">
+                Kemahasiswaan <span>▼</span>
+            </button>
+            <div class="nest-content-box" id="subKemahasiswaan">
+                <a href="#" class="nest-sub-link">Tata Tertib</a>
+                <a href="#" class="nest-sub-link">Organisasi Kemahasiswaan</a>
+                <a href="#" class="nest-sub-link">Prestasi</a>
+                <a href="#" class="nest-sub-link">Beasiswa</a>
+                <a href="#" class="nest-sub-link">Praktik Kerja Lapangan / Magang</a>
+                <a href="#" class="nest-sub-link">Pengembangan Karir</a>
+                <a href="#" class="nest-sub-link">Galeri Kemahasiswaan</a>
+            </div>
+
+            <button class="nest-trigger-btn" id="btn-subPenelitian" onclick="toggleNestedMenu(this, 'subPenelitian')">
+                Penelitian-Pengabdian <span>▼</span>
+            </button>
+            <div class="nest-content-box" id="subPenelitian">
+                <a href="#" class="nest-sub-link">Penelitian</a>
+                <a href="#" class="nest-sub-link">Pengabdian</a>
+                <a href="#" class="nest-sub-link">Laboratorium Riset</a>
+                <a href="#" class="nest-sub-link">Jurnal</a>
+            </div>
+
+            <a href="#" class="nest-link-btn" id="btn-subBerita">Berita & Pengumuman</a>
         </div>
-        <div class="search-box">.....Search</div>
+
+        <main class="main-content">
+            <h2>Polinema Campus</h2>
+            <p>Politeknik yang berada<br>di Malang</p>
+
+            <div class="campus-img-box">
+                <img src="img/WhatsApp Image 2026-06-08 at 12.05.52.jpeg" alt="Gedung Polinema">
+            </div>
+
+            <div class="accordion-group">
+                
+                <button class="acc-btn" onclick="toggleAccordion(this, 'accProdi')">
+                    Prodi <span class="acc-arrow">▼</span>
+                </button>
+                <div class="acc-container" id="accProdi">
+                    <a href="#" class="acc-sub-item">Teknik Informatika</a>
+                    <a href="#" class="acc-sub-item">Sistem Informasi Bisnis</a>
+                    <a href="#" class="acc-sub-item">Manajemen Informatika</a>
+                    <a href="#" class="acc-sub-item">Pengembangan Perangkat Lunak</a>
+                </div>
+
+                <button class="acc-btn" onclick="toggleAccordion(this, 'accMhs')">
+                    Mahasiswa Aktif <span class="acc-arrow">▼</span>
+                </button>
+                <div class="acc-container" id="accMhs">
+                    <a href="#" class="acc-sub-item">Jumlah Mahasiswa Aktif</a>
+                    <a href="#" class="acc-sub-item">Prestasi Mahasiswa Aktif</a>
+                    <a href="#" class="acc-sub-item">Biodata Mahasiswa Aktif</a>
+                </div>
+
+                <button class="acc-btn" onclick="toggleAccordion(this, 'accAlumni')">
+                    Alumni <span class="acc-arrow">▼</span>
+                </button>
+                <div class="acc-container" id="accAlumni">
+                    <a href="#" class="acc-sub-item">Prestasi Alumni</a>
+                    <a href="#" class="acc-sub-item">Total Alumni</a>
+                    <a href="#" class="acc-sub-item">Biodata Alumni</a>
+                </div>
+
+                <button class="acc-btn" onclick="toggleAccordion(this, 'accLab')">
+                    Laboratorium <span class="acc-arrow">▼</span>
+                </button>
+                <div class="acc-container" id="accLab">
+                    <a href="#" class="acc-sub-item">Jenis-jenis Laboratorium</a>
+                    <a href="#" class="acc-sub-item">Total Laboratorium</a>
+                    <a href="#" class="acc-sub-item">Detail Laboratorium</a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            Jl. Soekarno Hatta No.9, Jatimulyo,<br>
+            Kec. Lowokwaru, Kota Malang, Jawa Timur 65141
+        </footer>
+
     </div>
 
-    <main class="content">
-        <a href="#" class="box-event">Event</a>
-
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/3zPFX4DuYt4" 
-                    title="Video Profil Jurusan Teknologi Informasi" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen>
-            </iframe>
-        </div>
-
-        <div class="menu-list-group">
-            
-            <button class="dropdown-btn" onclick="toggleDropdown(this, 'prodiDropdown')">
-                <span class="dropdown-title">
-                    <i class="fa-solid fa-graduation-cap"></i> Program Studi
-                </span>
-                <span class="arrow-icon">▼</span>
-            </button>
-            <div class="dropdown-container" id="prodiDropdown">
-                <a href="#" class="sub-menu-item">Teknik Informatika</a>
-                <a href="#" class="sub-menu-item">Sistem Informasi Bisnis</a>
-                <a href="#" class="sub-menu-item">Manajemen Informatika</a>
-                <a href="#" class="sub-menu-item">Pengembangan Perangkat Lunak</a>
-            </div>
-
-            <button class="dropdown-btn" onclick="toggleDropdown(this, 'mahasiswaDropdown')">
-                <span class="dropdown-title">
-                    <i class="fa-solid fa-users"></i> Mahasiswa Aktif
-                </span>
-                <span class="arrow-icon">▼</span>
-            </button>
-            <div class="dropdown-container" id="mahasiswaDropdown">
-                <a href="#" class="sub-menu-item">Jumlah Mahasiswa Aktif</a>
-                <a href="#" class="sub-menu-item">Prestasi Mahasiswa Aktif</a>
-                <a href="#" class="sub-menu-item">Biodata Mahasiswa Aktif</a>
-            </div>
-
-            <button class="dropdown-btn" onclick="toggleDropdown(this, 'alumniDropdown')">
-                <span class="dropdown-title">
-                    <i class="fa-solid fa-user-graduate"></i> Alumni
-                </span>
-                <span class="arrow-icon">▼</span>
-            </button>
-            <div class="dropdown-container" id="alumniDropdown">
-                <a href="#" class="sub-menu-item">Prestasi Alumni</a>
-                <a href="#" class="sub-menu-item">Total Alumni</a>
-                <a href="#" class="sub-menu-item">Biodata Alumni</a>
-            </div>
-
-            <button class="dropdown-btn" onclick="toggleDropdown(this, 'labDropdown')">
-                <span class="dropdown-title">
-                    <i class="fa-solid fa-flask-vial"></i> Laboratorium Riset
-                </span>
-                <span class="arrow-icon">▼</span>
-            </button>
-            <div class="dropdown-container" id="labDropdown">
-                <a href="#" class="sub-menu-item">Jenis-jenis Laboratorium</a>
-                <a href="#" class="sub-menu-item">Total Laboratorium</a>
-                <a href="#" class="sub-menu-item">Detail Laboratorium</a>
-            </div>
-
-        </div>
-    </main>
-
-    <footer class="main-footer">
-        <div class="footer-logo-container">
-            <img src="Logo-polinema.PNG" alt="Logo Polinema Footer" class="footer-logo-img">
-        </div>
-        <p>Jl. Soekarno Hatta No.9, Jatimulyo,<br>Kec. Lowokwaru, Kota Malang, Jawa Timur 65141</p>
-    </footer>
-
     <script>
-        function toggleDropdown(buttonElement, dropdownId) {
-            const dropdownContainer = document.getElementById(dropdownId);
+        // 1. Fungsi Buka/Tutup Menu Garis 3 Utama
+        function toggleHamburger() {
+            const toggleBtn = document.getElementById('menuToggleBtn');
+            const menuBox = document.getElementById('hamburgerMenuBox');
+            
+            toggleBtn.classList.toggle('open');
+            menuBox.classList.toggle('show');
+        }
+
+        // 2. Fungsi Buka Konten Berlapis di dalam Menu Garis 3
+        function toggleNestedMenu(buttonElement, containerId) {
+            const contentBox = document.getElementById(containerId);
             buttonElement.classList.toggle('active');
             
-            if (dropdownContainer.style.maxHeight && dropdownContainer.style.maxHeight !== "0px") {
-                dropdownContainer.style.maxHeight = "0px";
-                dropdownContainer.classList.remove('open-border');
+            if (contentBox.style.maxHeight && contentBox.style.maxHeight !== "0px") {
+                contentBox.style.maxHeight = "0px";
             } else {
-                dropdownContainer.style.maxHeight = dropdownContainer.scrollHeight + "px";
-                dropdownContainer.classList.add('open-border');
+                contentBox.style.maxHeight = contentBox.scrollHeight + "px";
+            }
+        }
+
+        // 3. Pintasan Otomatis: Klik bar biru langsung membuka hamburger & isinya sekaligus
+        function openHamburgerToSection(sectionId) {
+            const toggleBtn = document.getElementById('menuToggleBtn');
+            const menuBox = document.getElementById('hamburgerMenuBox');
+            
+            // Buka panel besarnya dulu jika belum terbuka
+            if (!menuBox.classList.contains('show')) {
+                toggleBtn.classList.add('open');
+                menuBox.classList.add('show');
+            }
+            
+            // Cari tombol pemicu internalnya
+            const triggerBtn = document.getElementById('btn-' + sectionId);
+            if (triggerBtn) {
+                toggleNestedMenu(triggerBtn, sectionId);
+            }
+        }
+
+        // 4. Fungsi Buka/Tutup Model Accordion Kapsul di Bawah
+        function toggleAccordion(buttonElement, containerId) {
+            const accBox = document.getElementById(containerId);
+            buttonElement.classList.toggle('active');
+            
+            if (accBox.style.maxHeight && accBox.style.maxHeight !== "0px") {
+                accBox.style.maxHeight = "0px";
+            } else {
+                accBox.style.maxHeight = accBox.scrollHeight + "px";
             }
         }
     </script>
